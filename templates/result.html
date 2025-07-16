@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Prediction Result</title>
+{% endblock %}
+
+{% block body %}
+<h1>Prediction Result</h1>
+
+<div class="result-card">
+    {% if error %}
+    <p style="color: red;"><strong>{{ error }}</strong></p>
+    {% else %}
+    <p>For Driver: <strong>{{ driver }}</strong></p>
+    <p>Team: <strong>{{ team }}</strong></p>
+    <p>Event: <strong>{{ event }}</strong></p>
+    <p>Starting Grid: <strong>{{ grid }}</strong></p>
+    <hr>
+    <p>Podium Finish Prediction: <strong>{{ prediction }}</strong></p>
+    {% if confidence is defined %}
+    <p>Podium Finish Probability: <strong>{{ confidence }}%</strong></p>
+    {% endif %}
+    {% endif %}
+</div>
+
+<a href="{{ url_for('index') }}">Make another prediction</a>
+{% endblock %}

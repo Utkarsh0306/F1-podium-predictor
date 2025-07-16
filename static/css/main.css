@@ -1,0 +1,150 @@
+/* Define a vibrant accent color using CSS variables */
+:root {
+    --accent-color: #00ff89;
+    /* A vibrant neon green */
+    --background-dark: #121212;
+    --text-color: #e0e0e0;
+    --card-background: rgba(44, 44, 44, 0.4);
+    /* Semi-transparent dark grey for the card */
+}
+
+/* --- 1. General Body and Background Styling --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+
+    /* --- Corrected Background --- */
+    /* This combines the image and a semi-transparent gradient overlay */
+    background-image: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)),
+        url("../Images/20250714_1815_Racing in Rain_remix_01k05g147rf8mtzhdabs6e1nkh.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* --- 2. Main Container and Headings --- */
+/* We'll wrap our content in a div in base.html for better centering */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    color: #ffffff;
+    /* Subtle neon glow effect */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(0, 255, 137, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-weight: 400;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+/* --- 3. The "Glassmorphism" Form Card --- */
+form {
+    background: var(--card-background);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    text-align: left;
+    /* This creates the frosted glass effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* For Safari support */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* --- 4. Form Elements Styling --- */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style for when an input is focused (clicked on) */
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 255, 137, 0.5);
+}
+
+/* --- 5. The Impressive Button --- */
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: #121212;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffffff;
+    color: var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+/* --- 6. Result Page Styling --- */
+.result-card {
+    background: var(--card-background);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.result-card p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.result-card strong {
+    color: var(--accent-color);
+}
+
+a {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}

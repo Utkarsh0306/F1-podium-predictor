@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>F1 Podium Predictor</title>
+{% endblock %}
+
+{% block body %}
+<h1>F1 Podium Predictor</h1>
+<h2>Enter race details to predict a podium finish</h2>
+
+<form action="/predict" method="POST">
+    <label for="event">Event:</label>
+    <select id="event" name="event" required>
+        {% for event in events %}
+        <option value="{{ event }}">{{ event }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="driver">Driver:</label>
+    <select id="driver" name="driver" required>
+        {% for driver in drivers %}
+        <option value="{{ driver }}">{{ driver }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="team">Team:</label>
+    <select id="team" name="team" required>
+        {% for team in teams %}
+        <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="top_qualifier">Started in Top 3?</label>
+    <select id="top_qualifier" name="top_qualifier" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <button type="submit">Predict Podium Finish</button>
+</form>
+
+{% endblock %}

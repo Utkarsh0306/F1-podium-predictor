@@ -11,17 +11,69 @@
     {% if error %}
     <p style="color: red;"><strong>{{ error }}</strong></p>
     {% else %}
+    <p style="font-size: 0.8rem; color: #aaa;">Prediction generated using the {{ model_used }} model.</p>
     <p>For Driver: <strong>{{ driver }}</strong></p>
     <p>Team: <strong>{{ team }}</strong></p>
     <p>Event: <strong>{{ event }}</strong></p>
-    <p>Starting Grid: <strong>{{ grid }}</strong></p>
     <hr>
     <p>Podium Finish Prediction: <strong>{{ prediction }}</strong></p>
     {% if confidence is defined %}
     <p>Podium Finish Probability: <strong>{{ confidence }}%</strong></p>
     {% endif %}
+
+    {% if feature_importances %}
+    <div style="margin-top: 2rem;">
+        <h4>Feature Importance</h4>
+        <p style="font-size: 0.8rem; color: #aaa;">Which factors influenced the model's decision the most.</p>
+        <canvas id="importanceChart"></canvas>
+    </div>
+    {% endif %}
     {% endif %}
 </div>
 
 <a href="{{ url_for('index') }}">Make another prediction</a>
+
+{% if feature_importances %}
+<script>
+    // Get the data passed from Flask and convert it from JSON
+    const importanceData = {{ feature_importances | tojson | safe }};
+    const featureLabels = Object.keys(importanceData);
+    const importanceValues = Object.values(importanceData);
+
+    const ctx = document.getElementById('importanceChart').getContext('2d');
+    const importanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: featureLabels,
+            datasets: [{
+                label: 'Importance (%)',
+                data: importanceValues,
+                backgroundColor: 'rgba(0, 255, 137, 0.6)', // Semi-transparent accent color
+                borderColor: 'rgba(0, 255, 137, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Makes the bar chart horizontal
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                },
+                y: {
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Hides the legend label
+                }
+            }
+        }
+    });
+</script>
+{% endif %}
+
 {% endblock %}
